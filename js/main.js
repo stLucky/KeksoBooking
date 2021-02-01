@@ -1,42 +1,37 @@
 'use strict';
 
+// получить рандомное число
+
 const getRandomNumber = function (min, max) {
   let randomNumber;
   // min >=0 - чтобы диапазон был из положительных чисел
   if (max >= min && min >= 0) {
-    randomNumber = min + Math.random() * (max + 1 - min);
+    randomNumber = min - 0.5 + Math.random() * (max - min + 1);
   }
   // если max окажется < min, то поменять в формуле их значения местами
   else if (max < min && max >= 0) {
-    randomNumber = max + Math.random() * (min + 1 - max);
+    randomNumber = max - 0.5 + Math.random() * (min - max + 1);
   }
   // если отрицательные числа - то ошибка вычисления
   else {
     randomNumber = NaN;
   }
 
-  return Math.floor(randomNumber);
+  return randomNumber;
 }
 
+// получить рандомное целое число
 
-getRandomNumber();
+const getRandomInteger = function (min, max) {
+  return Math.round(getRandomNumber(min, max));
+}
 
-const getRandomFractionNumber = function (min, max, quantity) {
-  let randomFractionNumber;
+getRandomInteger(10, 20);
 
-  if (max >= min && min >= 0) {
-    randomFractionNumber = min - 0.5 + Math.random() * (max - min + 1);
-  }
+// получить рандомное дробное число
 
-  else if (max < min && max >= 0) {
-    randomFractionNumber = max - 0.5 + Math.random() * (min - max + 1);
-  }
-
-  else {
-    randomFractionNumber = NaN;
-  }
-
-  return +randomFractionNumber.toFixed(quantity);
+const getRandomFractionNumber = function (min, max, symbolNumber = 1) {
+  return +getRandomNumber(min, max).toFixed(symbolNumber);
 }
 
 getRandomFractionNumber();
