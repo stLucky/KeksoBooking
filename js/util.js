@@ -39,4 +39,9 @@ const getRandomArray = (array) => {
   return array.slice(0, getRandomInteger(1, array.length));
 };
 
-export { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray };
+const getDeclinedWord = (number, words) => {
+  return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
+}
+
+
+export { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray, getDeclinedWord };

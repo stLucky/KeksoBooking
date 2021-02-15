@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray } from './util.js'
+import { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray } from './util.js';
 
 const AVATAR_COUNT = 8;
 const MIN_PRICE = 1000;
@@ -17,7 +17,7 @@ const getAvatars = () => {
 
   for (let i = 0; i <= AVATAR_COUNT - 1; i++) {
     let j = i + 1;
-    avatars[i] = 'img/avatars/user0' + j + '.png';
+    avatars[i] = `img/avatars/user0${j}.png`;
   }
 
   return avatars;
@@ -88,7 +88,7 @@ const createOffer = (location) => {
   }
 };
 
-function createAd() {
+const createAd = () => {
   const location = createLocation()
 
   return {
@@ -100,4 +100,4 @@ function createAd() {
 
 const ads = new Array(ADS_COUNT).fill(null).map(() => createAd());
 
-console.log(ads);
+export { ads };
