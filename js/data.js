@@ -32,13 +32,13 @@ const housingTypes = [
   'bungalow',
 ];
 
-const checkinTime = [
+const checkInTime = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const checkoutTime = [
+const checkOutTime = [
   '12:00',
   '13:00',
   '14:00',
@@ -80,8 +80,8 @@ const createOffer = (location) => {
     type: getRandomArrayElement(housingTypes),
     rooms: getRandomInteger(1, MAX_NUMBER_ROOMS),
     guests: getRandomInteger(1, MAX_NUMBER_GUESTS),
-    checkin: getRandomArrayElement(checkinTime),
-    checkout: getRandomArrayElement(checkoutTime),
+    checkin: getRandomArrayElement(checkInTime),
+    checkout: getRandomArrayElement(checkOutTime),
     features: getRandomArray(getShuffleArray(features)),
     description: 'Милая, уютная квартира',
     photos: getRandomArray(photos),

@@ -56,8 +56,15 @@ const renderAd = ({ author: { avatar }, offer: { title, address, price, type, ro
   cardAdElement.querySelector('.popup__photos').appendChild(renderPhotoElements(photos));
 
   return cardAdElement;
-}
+};
 
 const adsElements = ads.map(renderAd);
 
 mapCanvas.appendChild(adsElements[3]);
+
+// Если добавить все объявления
+//  const adsFragment = document.createDocumentFragment();
+//  adsElements.forEach((adsElement) => {
+//  adsFragment.appendChild(adsElement)
+// })
+// mapCanvas.appendchild(adsFragment)
