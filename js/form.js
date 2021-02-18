@@ -4,8 +4,8 @@ const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
 
 
-selectTypeHousing.addEventListener('change', () => {
-  switch (selectTypeHousing.value) {
+selectTypeHousing.addEventListener('change', (evt) => {
+  switch (evt.target.value) {
     case 'bungalow':
       inputPrice.placeholder = '0';
       inputPrice.min = '0';
