@@ -47,7 +47,7 @@ mainPinMarker.on('moveend', (evt) => {
 });
 
 
-ads.forEach(({ location: { x, y }, author: { avatar }, offer: { title, address, price, type, rooms, guests, checkin, checkout, features, description, photos } }) => {
+ads.forEach(({ location: { x, y }, ...ad }) => {
   const icon = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: [40, 40],
@@ -62,11 +62,11 @@ ads.forEach(({ location: { x, y }, author: { avatar }, offer: { title, address, 
     {
       icon,
     },
-  )
+  );
 
   marker
     .addTo(map)
-    .bindPopup(renderAd({ author: { avatar }, offer: { title, address, price, type, rooms, guests, checkin, checkout, features, description, photos } }));
+    .bindPopup(renderAd({ ...ad }));
 });
 
 

@@ -45,6 +45,7 @@ fieldsetTime.addEventListener('change', (evt) => {
 
 
 const setInputAddress = (coordinates) => {
+  inputAddress.readOnly = true;
   inputAddress.value = coordinates;
 };
 

@@ -45,7 +45,12 @@ const checkOutTime = [
 ];
 
 const features = [
-
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 
 const photos = [
