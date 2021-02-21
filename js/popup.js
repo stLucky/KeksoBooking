@@ -1,8 +1,7 @@
-import { ads } from './data.js';
 import { getDeclinedWord, translateHousingType } from './util.js';
 
 
-const mapCanvas = document.querySelector('#map-canvas');
+// const mapCanvas = document.querySelector('#map-canvas');
 const cardAdTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 
@@ -36,7 +35,8 @@ const renderPhotoElements = (photos) => {
 };
 
 
-const renderAd = ({ author: { avatar }, offer: { title, address, price, type, rooms, guests, checkin, checkout, features, description, photos } }) => {
+const renderAd = (ad) => {
+  const { author: { avatar }, offer: { title, address, price, type, rooms, guests, checkin, checkout, features, description, photos } } = ad;
   const cardAdElement = cardAdTemplate.cloneNode(true);
 
   cardAdElement.querySelector('.popup__avatar').src = avatar;
@@ -49,8 +49,16 @@ const renderAd = ({ author: { avatar }, offer: { title, address, price, type, ro
   cardAdElement.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
   cardAdElement.querySelector('.popup__description').textContent = description;
 
+  if (features.length === 0) {
+    cardAdElement.querySelector('.popup__features').style.display = 'none';
+  }
+
   cardAdElement.querySelector('.popup__features').innerHTML = '';
-  cardAdElement.querySelector('.popup__features').appendChild(renderFeatureElements(features))
+  cardAdElement.querySelector('.popup__features').appendChild(renderFeatureElements(features));
+
+  if (photos.length === 0) {
+    cardAdElement.querySelector('.popup__photos').style.display = 'none';
+  }
 
   cardAdElement.querySelector('.popup__photos').innerHTML = '';
   cardAdElement.querySelector('.popup__photos').appendChild(renderPhotoElements(photos));
@@ -58,13 +66,7 @@ const renderAd = ({ author: { avatar }, offer: { title, address, price, type, ro
   return cardAdElement;
 };
 
-const adsElements = ads.map(renderAd);
+// const adsElements = ads.map(renderAd);
 
-mapCanvas.appendChild(adsElements[3]);
 
-// Если добавить все объявления
-//  const adsFragment = document.createDocumentFragment();
-//  adsElements.forEach((adsElement) => {
-//  adsFragment.appendChild(adsElement)
-// })
-// mapCanvas.appendchild(adsFragment)
+export { renderAd };

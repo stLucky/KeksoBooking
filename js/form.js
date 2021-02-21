@@ -1,7 +1,11 @@
+const COORDINATES_TOKYO = '35.681700, 139.753882';
+
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
+const fieldsetTime = document.querySelector('.ad-form__element--time');
+const inputAddress = document.querySelector('#address');
 
 
 selectTypeHousing.addEventListener('change', (evt) => {
@@ -29,10 +33,23 @@ selectTypeHousing.addEventListener('change', (evt) => {
 });
 
 
-selectTimeIn.addEventListener('change', () => {
-  selectTimeOut.value = selectTimeIn.value;
+fieldsetTime.addEventListener('change', (evt) => {
+  if (evt.target.name === 'timein') {
+    selectTimeOut.value = evt.target.value;
+  }
+
+  if (evt.target.name === 'timeout') {
+    selectTimeIn.value = evt.target.value;
+  }
 });
 
-selectTimeOut.addEventListener('change', () => {
-  selectTimeIn.value = selectTimeOut.value;
-});
+
+const setInputAddress = (coordinates) => {
+  inputAddress.readOnly = true;
+  inputAddress.value = coordinates;
+};
+
+setInputAddress(COORDINATES_TOKYO);
+
+
+export { inputAddress };

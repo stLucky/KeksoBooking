@@ -100,4 +100,4 @@ const createAd = () => {
 
 const ads = new Array(ADS_COUNT).fill(null).map(() => createAd());
 
-export { ads };
+export { ads, FLOAT_POINT_COORDINATE };
