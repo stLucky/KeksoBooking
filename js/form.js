@@ -13,6 +13,7 @@ const selectRooms = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 const selectCapacityOptions = selectCapacity.querySelectorAll('option');
 
+
 const setInputPrice = () => {
   switch (selectTypeHousing.value) {
     case 'bungalow':
@@ -37,42 +38,42 @@ const setInputPrice = () => {
   }
 }
 
-const setSelectCapacity = (availableNumber) => {
+
+const setSelectCapacity = () => {
+  const maxNumberRooms = 100;
+  const specialCapacity = 0;
+
   for (let i = 0; i < selectCapacityOptions.length; i++) {
-    if (+selectRooms.value === availableNumber) {
+    selectCapacityOptions[i].style.display = 'none';
+
+    if (+selectCapacityOptions[i].value <= +selectRooms.value && +selectCapacityOptions[i].value !== specialCapacity && +selectRooms.value !== maxNumberRooms) {
       selectCapacityOptions[i].style.display = 'block';
+    }
 
-      if (+selectCapacityOptions[i].value > availableNumber || selectCapacityOptions[i].value === '0') {
-        selectCapacityOptions[i].style.display = 'none';
-      }
+    if (+selectCapacityOptions[i].value === specialCapacity && +selectRooms.value >= maxNumberRooms) {
+      selectCapacityOptions[i].style.display = 'block';
+      selectCapacityOptions[i].selected = true;
+    }
 
-      if (+selectCapacityOptions[i].value === availableNumber) {
-        selectCapacityOptions[i].selected = true;
-      }
+    if (+selectCapacityOptions[i].value === +selectRooms.value) {
+      selectCapacityOptions[i].selected = true;
     }
   }
 };
 
-const setSelectSpecialCapacity = (availableNumberRooms, availableCapacity) => {
-  for (let i = 0; i < selectCapacityOptions.length; i++) {
-    if (+selectRooms.value === availableNumberRooms) {
-      selectCapacityOptions[i].style.display = 'none';
-
-      if (+selectCapacityOptions[i].value === availableCapacity) {
-        selectCapacityOptions[i].style.display = 'block';
-        selectCapacityOptions[i].selected = true;
-      }
-    }
-  }
-};
 
 const setInputAddress = (coordinates) => {
   inputAddress.readOnly = true;
   inputAddress.value = coordinates;
 };
 
-
 setInputAddress(COORDINATES_TOKYO);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  setInputPrice();
+  setSelectCapacity();
+});
 
 
 inputTitle.addEventListener('input', () => {
@@ -87,13 +88,7 @@ inputTitle.addEventListener('input', () => {
   }
 
   inputTitle.reportValidity();
-})
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  setInputPrice();
-  setSelectCapacity(1);
-})
+});
 
 
 selectTypeHousing.addEventListener('change', () => {
@@ -113,11 +108,8 @@ fieldsetTime.addEventListener('change', (evt) => {
 
 
 selectRooms.addEventListener('change', () => {
-  setSelectCapacity(1);
-  setSelectCapacity(2);
-  setSelectCapacity(3);
-  setSelectSpecialCapacity(100, 0);
-})
+  setSelectCapacity();
+});
 
 
 export { inputAddress };
