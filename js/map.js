@@ -1,13 +1,16 @@
+/* global L:readonly */
 import { inputAddress } from './form.js';
-import { ads, FLOAT_POINT_COORDINATE } from './data.js';
 import { renderAd } from './popup.js';
 
-/* global L:readonly */
+const FLOAT_POINT_COORDINATE = 5;
+const LAT_CENTER_TOKYO = 35.681700;
+const LNG_CENTER_TOKYO = 139.753882;
+
 const map = L.map('map-canvas')
   .setView({
     lat: 35.681700,
     lng: 139.753882,
-  }, 12);
+  }, 9);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -26,8 +29,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.681700,
-    lng: 139.753882,
+    lat: LAT_CENTER_TOKYO,
+    lng: LNG_CENTER_TOKYO,
   },
   {
     draggable: true,
@@ -40,34 +43,40 @@ mainPinMarker.addTo(map);
 
 mainPinMarker.on('moveend', (evt) => {
   const coordinates = Object.values(evt.target.getLatLng()).map((coordinate) => {
-    return coordinate.toFixed(FLOAT_POINT_COORDINATE)
-  }).join(', ')
+    return coordinate.toFixed(FLOAT_POINT_COORDINATE);
+  }).join(', ');
 
   inputAddress.value = coordinates;
 });
 
 
-ads.forEach(({ location: { x, y }, ...ad }) => {
-  const icon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+const setDefaultCoordMainPin = () => {
+  mainPinMarker.setLatLng([LAT_CENTER_TOKYO, LNG_CENTER_TOKYO])
+}
+
+
+const renderMarksonMap = (ads) => {
+  ads.forEach(({ location: { lat, lng }, ...ad }) => {
+    const icon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+
+    const marker = L.marker(
+      {
+        lat: lat,
+        lng: lng,
+      },
+      {
+        icon,
+      },
+    );
+
+    marker
+      .addTo(map)
+      .bindPopup(renderAd({ ...ad }));
   });
+}
 
-  const marker = L.marker(
-    {
-      lat: x,
-      lng: y,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(renderAd({ ...ad }));
-});
-
-
-export { map };
+export { map, renderMarksonMap, setDefaultCoordMainPin, LAT_CENTER_TOKYO, LNG_CENTER_TOKYO };
