@@ -1,3 +1,7 @@
+import { setDefaultAdForm } from './form.js';
+import { setDefaultMapForm } from './map-filters.js';
+import { setDefaultCoordMainPin } from './map.js';
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = document.querySelectorAll('fieldset');
 const mapForm = document.querySelector('.map__filters');
@@ -17,6 +21,7 @@ const switchToInactiveState = () => {
   }
 }
 
+
 const switchToActiveState = () => {
   adForm.classList.remove('ad-form--disabled');
   mapForm.classList.remove('map__filters--disabled');
@@ -30,4 +35,11 @@ const switchToActiveState = () => {
   }
 }
 
-export { switchToInactiveState, switchToActiveState };
+
+const setPageInDefault = () => {
+  setDefaultAdForm();
+  setDefaultMapForm();
+  setDefaultCoordMainPin();
+}
+
+export { switchToInactiveState, switchToActiveState, setPageInDefault };

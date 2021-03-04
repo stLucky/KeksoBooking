@@ -55,7 +55,12 @@ const translateHousingType = (type) => {
     case 'palace':
       return 'Дворец';
   }
-}
+};
 
 
-export { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray, getDeclinedWord, translateHousingType };
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+
+export { getRandomInteger, getRandomFractionNumber, getRandomArrayElement, getShuffleArray, getRandomArray, getDeclinedWord, translateHousingType, isEscEvent };
