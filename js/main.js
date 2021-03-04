@@ -5,7 +5,6 @@ import { showAlertOnMap } from './popup-messages.js';
 import { getData } from './api.js'
 
 import './util.js';
-import './data.js';
 import './popup.js';
 import './form.js';
 import './map-filters.js';
@@ -21,7 +20,9 @@ map.whenReady(() => {
 });
 
 
-getData(renderMarksonMap, () => showAlertOnMap('Не удалось загрузить данные'));
+getData()
+  .then(renderMarksonMap)
+  .catch(() => showAlertOnMap('Не удалось загрузить данные'))
 
 
 setAdFormSubmit(setPageInDefault);

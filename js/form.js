@@ -147,7 +147,12 @@ const setAdFormSubmit = (onSuccess) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    sendData(onSuccess, showSuccessAlert, showErrorAlert, new FormData(evt.target));
+    sendData(new FormData(evt.target))
+      .then(() => {
+        showSuccessAlert();
+        onSuccess();
+      })
+      .catch(showErrorAlert);
   });
 }
 

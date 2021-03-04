@@ -1,22 +1,17 @@
-const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+const getData = () => {
+  return fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
+      } else {
+        throw new Error('Не удалось получить данные');
       }
-      onFail();
     })
-    .then((ads) => {
-      onSuccess(ads);
-    })
-    .catch(() => {
-      onFail();
-    });
 };
 
 
-const sendData = (onSuccess, onSuccessMessage, onFail, body) => {
-  fetch(
+const sendData = (body) => {
+  return fetch(
     'https://22.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
@@ -24,22 +19,12 @@ const sendData = (onSuccess, onSuccessMessage, onFail, body) => {
     },
   ).then((response) => {
     if (response.ok) {
-      onSuccess();
-      onSuccessMessage();
+      return response.json();
     } else {
-      onFail();
+      throw new Error('Не удалось отправить данные');
     }
   })
-    .catch(() => {
-      onFail();
-    });
 };
 
 
 export { getData, sendData };
-
-
-
-
-
-

@@ -34,11 +34,17 @@ const showAlertOnMap = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const createPopup = (template) => {
+  const element = template.cloneNode(true);
+  element.style.zIndex = '1000';
+  mainElement.append(element);
+
+  return element;
+}
+
 
 const showSuccessAlert = () => {
-  const successElement = successTemplate.cloneNode(true);
-  successElement.style.zIndex = '1000';
-  mainElement.append(successElement);
+  const successElement = createPopup(successTemplate);
 
   const removeSuccessEventListener = () => {
     document.removeEventListener('keydown', onSuccessEscKeydown);
@@ -64,10 +70,9 @@ const showSuccessAlert = () => {
 
 
 const showErrorAlert = () => {
-  const errorElement = errorTemplate.cloneNode(true);
+  const errorElement = createPopup(errorTemplate);
+
   const errorButton = errorElement.querySelector('.error__button');
-  errorElement.style.zIndex = '1000';
-  mainElement.append(errorElement);
 
   const removeErrorEventListener = () => {
     document.removeEventListener('keydown', onErrorEscKeydown);
