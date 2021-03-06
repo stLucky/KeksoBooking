@@ -1,13 +1,14 @@
 const mapForm = document.querySelector('.map__filters');
 const selectType = mapForm.querySelector('#housing-type');
-const defaultOptionType = selectType.querySelector('[selected]');
 const selectPrice = mapForm.querySelector('#housing-price');
-const defaultOptionPrice = selectPrice.querySelector('[selected]');
 const selectRooms = mapForm.querySelector('#housing-rooms');
-const defaultOptionRooms = selectRooms.querySelector('[selected]');
 const selectGuests = mapForm.querySelector('#housing-guests');
-const defaultOptionGuests = selectGuests.querySelector('[selected]');
 const checkboxesFeatures = mapForm.querySelectorAll('.map__checkbox');
+
+const defaultOptionType = selectType.querySelector('[selected]');
+const defaultOptionPrice = selectPrice.querySelector('[selected]');
+const defaultOptionRooms = selectRooms.querySelector('[selected]');
+const defaultOptionGuests = selectGuests.querySelector('[selected]');
 
 
 const setDefaultMapForm = () => {
@@ -21,5 +22,31 @@ const setDefaultMapForm = () => {
   }
 };
 
+const setTypeHousingFilter = (ads, cb) => {
+  selectType.addEventListener('change', (evt) => {
+    const renderAdsForTypeHousing = (type) => {
+      if (evt.target.value === type) {
+        const filteredAds = ads.filter((ad) => {
+          return ad.offer.type === type;
+        });
 
-export { setDefaultMapForm };
+        cb(filteredAds);
+      }
+    };
+
+    const renderAdsForAnyTypeHousing = () => {
+      if (evt.target.value === 'any') {
+        cb(ads);
+      }
+    }
+
+    renderAdsForAnyTypeHousing();
+    renderAdsForTypeHousing('palace');
+    renderAdsForTypeHousing('flat');
+    renderAdsForTypeHousing('house');
+    renderAdsForTypeHousing('bungalow');
+  })
+};
+
+
+export { setDefaultMapForm, setTypeHousingFilter };
