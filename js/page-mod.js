@@ -3,8 +3,9 @@ import { setDefaultMapForm } from './map-filters.js';
 import { setDefaultCoordMainPin } from './map.js';
 
 const adForm = document.querySelector('.ad-form');
-const fieldsets = document.querySelectorAll('fieldset');
+const fieldsetsAdForm = adForm.querySelectorAll('fieldset');
 const mapForm = document.querySelector('.map__filters');
+const fieldsetMapForm = mapForm.querySelector('fieldset');
 const mapFormSelects = document.querySelectorAll('.map__filter');
 
 
@@ -12,9 +13,11 @@ const switchToInactiveState = () => {
   adForm.classList.add('ad-form--disabled');
   mapForm.classList.add('map__filters--disabled');
 
-  for (let fieldset of fieldsets) {
+  for (let fieldset of fieldsetsAdForm) {
     fieldset.disabled = true;
   }
+
+  fieldsetMapForm.disabled = true;
 
   for (let select of mapFormSelects) {
     select.disabled = true;
@@ -22,13 +25,19 @@ const switchToInactiveState = () => {
 }
 
 
-const switchToActiveState = () => {
+const switchToActiveStateForm = () => {
   adForm.classList.remove('ad-form--disabled');
-  mapForm.classList.remove('map__filters--disabled');
 
-  for (let fieldset of fieldsets) {
+
+  for (let fieldset of fieldsetsAdForm) {
     fieldset.disabled = false;
   }
+}
+
+const switchToActiveStateFilters = () => {
+  mapForm.classList.remove('map__filters--disabled');
+
+  fieldsetMapForm.disabled = false;
 
   for (let select of mapFormSelects) {
     select.disabled = false;
@@ -42,4 +51,4 @@ const setPageInDefault = () => {
   setDefaultCoordMainPin();
 }
 
-export { switchToInactiveState, switchToActiveState, setPageInDefault };
+export { switchToInactiveState, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault };

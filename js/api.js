@@ -1,4 +1,4 @@
-const getData = () => {
+const getData = (onSuccess) => {
   return fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => {
       if (response.ok) {
@@ -7,6 +7,9 @@ const getData = () => {
         throw new Error('Не удалось получить данные');
       }
     })
+    .then((ads) => {
+      onSuccess(ads);
+    });
 };
 
 

@@ -5,6 +5,7 @@ import { renderAd } from './popup.js';
 const FLOAT_POINT_COORDINATE = 5;
 const LAT_CENTER_TOKYO = 35.681700;
 const LNG_CENTER_TOKYO = 139.753882;
+const AD_COUNTER = 10;
 
 const map = L.map('map-canvas')
   .setView({
@@ -55,28 +56,35 @@ const setDefaultCoordMainPin = () => {
 }
 
 
-const renderMarksonMap = (ads) => {
-  ads.forEach(({ location: { lat, lng }, ...ad }) => {
-    const icon = L.icon({
-      iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+const layerGroupMarkers = L.layerGroup().addTo(map);
+
+
+const renderMarksOnMap = (ads) => {
+  layerGroupMarkers.clearLayers()
+
+  ads
+    .slice(0, AD_COUNTER)
+    .forEach(({ location: { lat, lng }, ...ad }) => {
+      const icon = L.icon({
+        iconUrl: 'img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
+
+      const marker = L.marker(
+        {
+          lat: lat,
+          lng: lng,
+        },
+        {
+          icon,
+        },
+      );
+
+      marker
+        .addTo(layerGroupMarkers)
+        .bindPopup(renderAd({ ...ad }));
     });
-
-    const marker = L.marker(
-      {
-        lat: lat,
-        lng: lng,
-      },
-      {
-        icon,
-      },
-    );
-
-    marker
-      .addTo(map)
-      .bindPopup(renderAd({ ...ad }));
-  });
 }
 
-export { map, renderMarksonMap, setDefaultCoordMainPin, LAT_CENTER_TOKYO, LNG_CENTER_TOKYO };
+export { map, renderMarksOnMap, setDefaultCoordMainPin, LAT_CENTER_TOKYO, LNG_CENTER_TOKYO };
