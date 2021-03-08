@@ -22,31 +22,82 @@ const setDefaultMapForm = () => {
   }
 };
 
-const setTypeHousingFilter = (ads, cb) => {
-  selectType.addEventListener('change', (evt) => {
-    const renderAdsForTypeHousing = (type) => {
-      if (evt.target.value === type) {
-        const filteredAds = ads.filter((ad) => {
-          return ad.offer.type === type;
-        });
 
-        cb(filteredAds);
-      }
-    };
-
-    const renderAdsForAnyTypeHousing = () => {
-      if (evt.target.value === 'any') {
-        cb(ads);
-      }
-    }
-
-    renderAdsForAnyTypeHousing();
-    renderAdsForTypeHousing('palace');
-    renderAdsForTypeHousing('flat');
-    renderAdsForTypeHousing('house');
-    renderAdsForTypeHousing('bungalow');
-  })
+const getFilterOfType = (ad) => {
+  switch (selectType.value) {
+    case 'palace':
+      return ad.offer.type === 'palace';
+    case 'flat':
+      return ad.offer.type === 'flat'
+    case 'house':
+      return ad.offer.type === 'house';
+    case 'bungalow':
+      return ad.offer.type === 'bungalow';
+    case 'any':
+      return ad;
+  }
 };
 
 
-export { setDefaultMapForm, setTypeHousingFilter };
+const getFilterOfPrice = (ad) => {
+  const MAX_LOW_PRICE = 10000;
+  const MAX_MIDDLE_PRICE = 50000;
+
+  switch (selectPrice.value) {
+    case 'low':
+      return ad.offer.price < MAX_LOW_PRICE;
+    case 'middle':
+      return (ad.offer.price >= MAX_LOW_PRICE && ad.offer.price < MAX_MIDDLE_PRICE);
+    case 'high':
+      return ad.offer.price >= MAX_MIDDLE_PRICE;
+    case 'any':
+      return ad;
+  }
+};
+
+
+const getFilterOfRooms = (ad) => {
+  if (selectRooms.value === 'any') {
+    return ad;
+  }
+
+  return (ad.offer.rooms === +selectRooms.value);
+}
+
+
+const getFilterOfGuests = (ad) => {
+  if (selectGuests.value === 'any') {
+    return ad;
+  }
+
+  return (ad.offer.guests <= +selectGuests.value);
+};
+
+
+const getFilterOfFeatures = (ad) => {
+  const checkedCheckboxesFeatures = Array.from(mapForm.querySelectorAll('.map__checkbox:checked'));
+
+  return checkedCheckboxesFeatures.every((checkbox) => {
+    return ad.offer.features.includes(checkbox.value);
+  })
+}
+
+
+const setMapFilters = (ads, cb) => {
+  const getFilteredAds = (ads) => {
+    return ads.filter((ad) => {
+      return (getFilterOfType(ad)
+        && getFilterOfPrice(ad)
+        && getFilterOfRooms(ad)
+        && getFilterOfGuests(ad)
+        && getFilterOfFeatures(ad));
+    });
+  };
+
+  mapForm.addEventListener('change', () => {
+    cb(getFilteredAds(ads));
+  });
+};
+
+
+export { setDefaultMapForm, setMapFilters };

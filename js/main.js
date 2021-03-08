@@ -1,9 +1,10 @@
+/* global _:readonly */
 import { map, renderMarksOnMap } from './map.js';
 import { switchToInactiveState, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault } from './page-mod.js';
 import { setAdFormSubmit } from './form.js';
 import { showAlertOnMap } from './popup-messages.js';
 import { getData } from './api.js'
-import { setTypeHousingFilter } from './map-filters.js'
+import { setMapFilters } from './map-filters.js'
 
 import './util.js';
 import './popup.js';
@@ -11,6 +12,9 @@ import './form.js';
 import './map-filters.js';
 import './map.js';
 import './api.js';
+import './previews.js';
+
+const RERENDER_DELAY = 500;
 
 const resetFormButton = document.querySelector('.ad-form__reset');
 
@@ -23,7 +27,7 @@ map.whenReady(() => {
   getData((ads) => {
     renderMarksOnMap(ads);
     switchToActiveStateFilters();
-    setTypeHousingFilter(ads, renderMarksOnMap)
+    setMapFilters(ads, _.debounce(renderMarksOnMap, RERENDER_DELAY))
   })
     .catch(() => showAlertOnMap('Не удалось загрузить данные'));
 });

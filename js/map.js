@@ -60,7 +60,7 @@ const layerGroupMarkers = L.layerGroup().addTo(map);
 
 
 const renderMarksOnMap = (ads) => {
-  layerGroupMarkers.clearLayers()
+  layerGroupMarkers.clearLayers();
 
   ads
     .slice(0, AD_COUNTER)
