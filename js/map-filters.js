@@ -34,7 +34,7 @@ const getFilterOfType = (ad) => {
     case 'bungalow':
       return ad.offer.type === 'bungalow';
     case 'any':
-      return ad;
+      return true;
   }
 };
 
@@ -51,14 +51,14 @@ const getFilterOfPrice = (ad) => {
     case 'high':
       return ad.offer.price >= MAX_MIDDLE_PRICE;
     case 'any':
-      return ad;
+      return true;
   }
 };
 
 
 const getFilterOfRooms = (ad) => {
   if (selectRooms.value === 'any') {
-    return ad;
+    return true;
   }
 
   return (ad.offer.rooms === +selectRooms.value);
@@ -67,7 +67,7 @@ const getFilterOfRooms = (ad) => {
 
 const getFilterOfGuests = (ad) => {
   if (selectGuests.value === 'any') {
-    return ad;
+    return true;
   }
 
   return (ad.offer.guests <= +selectGuests.value);
