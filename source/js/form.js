@@ -1,6 +1,7 @@
 import { LAT_CENTER_TOKYO, LNG_CENTER_TOKYO } from './map.js';
 import { showSuccessAlert, showErrorAlert } from './popup-messages.js';
 import { sendData } from './api.js';
+import { resetPreviews } from './previews.js';
 
 const COORDINATES_TOKYO = '35.681700, 139.753882';
 const MIN_TITLE_LENGTH = 30;
@@ -136,6 +137,7 @@ const setDefaultAdForm = () => {
   inputAddress.value = COORDINATES_TOKYO;
   selectTimeIn.value = defaultOptionTimeIn.value;
   selectTimeOut.value = defaultOptionTimeOut.value;
+  resetPreviews();
 
   for (let checkbox of checkboxesFeatures) {
     checkbox.checked = false;

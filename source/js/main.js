@@ -1,10 +1,12 @@
-/* global _:readonly */
 import { map, renderMarksOnMap } from './map.js';
 import { switchToInactiveState, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault } from './page-mod.js';
 import { setAdFormSubmit } from './form.js';
 import { showAlertOnMap } from './popup-messages.js';
-import { getData } from './api.js'
-import { setMapFilters } from './map-filters.js'
+import { getData } from './api.js';
+import { setMapFilters } from './map-filters.js';
+import * as debounce from 'lodash.debounce';
+
+import 'leaflet/dist/leaflet.css';
 
 import './util.js';
 import './popup.js';
@@ -27,7 +29,7 @@ map.whenReady(() => {
   getData((ads) => {
     renderMarksOnMap(ads);
     switchToActiveStateFilters();
-    setMapFilters(ads, _.debounce(renderMarksOnMap, RERENDER_DELAY))
+    setMapFilters(ads, debounce(renderMarksOnMap, RERENDER_DELAY))
   })
     .catch(() => showAlertOnMap('Не удалось загрузить данные'));
 });

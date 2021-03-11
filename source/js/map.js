@@ -1,4 +1,5 @@
-/* global L:readonly */
+import L from 'leaflet';
+
 import { inputAddress } from './form.js';
 import { renderAd } from './popup.js';
 
