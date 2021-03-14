@@ -9,7 +9,7 @@ const fieldsetMapForm = mapForm.querySelector('fieldset');
 const mapFormSelects = document.querySelectorAll('.map__filter');
 
 
-const switchToInactiveState = () => {
+const switchToInactiveStatePage = () => {
   adForm.classList.add('ad-form--disabled');
   mapForm.classList.add('map__filters--disabled');
 
@@ -22,17 +22,17 @@ const switchToInactiveState = () => {
   for (let select of mapFormSelects) {
     select.disabled = true;
   }
-}
+};
 
 
 const switchToActiveStateForm = () => {
   adForm.classList.remove('ad-form--disabled');
 
-
   for (let fieldset of fieldsetsAdForm) {
     fieldset.disabled = false;
   }
-}
+};
+
 
 const switchToActiveStateFilters = () => {
   mapForm.classList.remove('map__filters--disabled');
@@ -42,13 +42,14 @@ const switchToActiveStateFilters = () => {
   for (let select of mapFormSelects) {
     select.disabled = false;
   }
-}
+};
 
 
 const setPageInDefault = () => {
   setDefaultAdForm();
   setDefaultMapForm();
   setDefaultCoordMainPin();
-}
+};
 
-export { switchToInactiveState, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault };
+
+export { switchToInactiveStatePage, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault };

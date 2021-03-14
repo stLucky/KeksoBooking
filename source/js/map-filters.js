@@ -79,8 +79,8 @@ const getFilterOfFeatures = (ad) => {
 
   return checkedCheckboxesFeatures.every((checkbox) => {
     return ad.offer.features.includes(checkbox.value);
-  })
-}
+  });
+};
 
 
 const setMapFilters = (ads, cb) => {

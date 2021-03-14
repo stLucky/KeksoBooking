@@ -6,15 +6,17 @@ const housePhotoPreview = document.querySelector('.ad-form__photo');
 const housePhotoInput = document.querySelector('.ad-form__upload input[type=file]');
 
 
-const getImageForHousePreview = () => {
-  const imageElement = document.createElement('img');
-  housePhotoPreview.append(imageElement);
+const imageElement = document.createElement('img');
 
+
+const addImageForHousePreview = () => {
   imageElement.style.width = '100%';
   imageElement.style.height = '100%';
 
-  return imageElement;
+  housePhotoPreview.append(imageElement);
 };
+
+addImageForHousePreview();
 
 
 const showPreviewImage = (inputElement, imageElement) => {
@@ -39,4 +41,12 @@ const showPreviewImage = (inputElement, imageElement) => {
 };
 
 showPreviewImage(avatarInput, avatarPreview);
-showPreviewImage(housePhotoInput, getImageForHousePreview());
+showPreviewImage(housePhotoInput, imageElement);
+
+
+const resetPreviews = () => {
+  avatarPreview.src = 'img/muffin-grey.svg';
+  imageElement.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg"%3E%3C/svg%3E';
+};
+
+export { resetPreviews };

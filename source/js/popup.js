@@ -1,7 +1,5 @@
 import { getDeclinedWord, translateHousingType } from './util.js';
 
-
-// const mapCanvas = document.querySelector('#map-canvas');
 const cardAdTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 
@@ -43,7 +41,13 @@ const renderAd = (ad) => {
   cardAdElement.querySelector('.popup__title').textContent = title;
   cardAdElement.querySelector('.popup__text--address').textContent = address;
   cardAdElement.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
-  cardAdElement.querySelector('.popup__type').textContent = translateHousingType(type);
+
+  try {
+    cardAdElement.querySelector('.popup__type').textContent = translateHousingType(type);
+  } catch (error) {
+    cardAdElement.querySelector('.popup__type').textContent = `${type}`;
+  }
+
   cardAdElement.querySelector('.popup__text--capacity').textContent = `${rooms} ${getDeclinedWord(rooms, ['комната', 'комнаты', 'комнат'])}
   для ${guests} ${getDeclinedWord(guests, ['гостя', 'гостей', 'гостей'])}`;
   cardAdElement.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
@@ -65,8 +69,6 @@ const renderAd = (ad) => {
 
   return cardAdElement;
 };
-
-// const adsElements = ads.map(renderAd);
 
 
 export { renderAd };

@@ -1,4 +1,5 @@
-/* global L:readonly */
+import L from 'leaflet';
+
 import { inputAddress } from './form.js';
 import { renderAd } from './popup.js';
 
@@ -6,6 +7,7 @@ const FLOAT_POINT_COORDINATE = 5;
 const LAT_CENTER_TOKYO = 35.681700;
 const LNG_CENTER_TOKYO = 139.753882;
 const AD_COUNTER = 10;
+
 
 const map = L.map('map-canvas')
   .setView({
@@ -39,6 +41,7 @@ const mainPinMarker = L.marker(
   },
 );
 
+
 mainPinMarker.addTo(map);
 
 
@@ -52,7 +55,7 @@ mainPinMarker.on('moveend', (evt) => {
 
 
 const setDefaultCoordMainPin = () => {
-  mainPinMarker.setLatLng([LAT_CENTER_TOKYO, LNG_CENTER_TOKYO])
+  mainPinMarker.setLatLng([LAT_CENTER_TOKYO, LNG_CENTER_TOKYO]);
 }
 
 
