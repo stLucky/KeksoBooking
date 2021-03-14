@@ -6,6 +6,10 @@ import { resetPreviews } from './previews.js';
 const COORDINATES_TOKYO = '35.681700, 139.753882';
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const MIN_PRICE_FOR_BUNGALOW = '0';
+const MIN_PRICE_FOR_FLAT = '1000';
+const MIN_PRICE_FOR_HOUSE = '5000';
+const MIN_PRICE_FOR_PALACE = '10000';
 
 const adForm = document.querySelector('.ad-form')
 const selectTypeHousing = adForm.querySelector('#type');
@@ -30,24 +34,28 @@ const defaultOptionTimeOut = selectTimeOut.querySelector('[selected]');
 const setInputPrice = () => {
   switch (selectTypeHousing.value) {
     case 'bungalow':
-      inputPrice.placeholder = '0';
-      inputPrice.min = '0';
+      inputPrice.placeholder = MIN_PRICE_FOR_BUNGALOW;
+      inputPrice.min = MIN_PRICE_FOR_BUNGALOW;
       break;
 
     case 'flat':
-      inputPrice.placeholder = '1000';
-      inputPrice.min = '1000';
+      inputPrice.placeholder = MIN_PRICE_FOR_FLAT;
+      inputPrice.min = MIN_PRICE_FOR_FLAT;
       break;
 
     case 'house':
-      inputPrice.placeholder = '5000';
-      inputPrice.min = '5000';
+      inputPrice.placeholder = MIN_PRICE_FOR_HOUSE;
+      inputPrice.min = MIN_PRICE_FOR_HOUSE;
       break;
 
     case 'palace':
-      inputPrice.placeholder = '10000';
-      inputPrice.min = '10000';
+      inputPrice.placeholder = MIN_PRICE_FOR_PALACE;
+      inputPrice.min = MIN_PRICE_FOR_PALACE;
       break;
+
+    default:
+      inputPrice.placeholder = 'Неизвестное значение';
+      inputPrice.min = null;
   }
 }
 
@@ -156,7 +164,7 @@ const setAdFormSubmit = (onSuccess) => {
       })
       .catch(showErrorAlert);
   });
-}
+};
 
 
 export { setInputAddress, setDefaultAdForm, setAdFormSubmit, inputAddress };

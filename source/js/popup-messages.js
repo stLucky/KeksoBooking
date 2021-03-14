@@ -6,6 +6,7 @@ const successTemplate = document.querySelector('#success').content.querySelector
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const mainElement = document.querySelector('main');
 
+
 const showAlertOnMap = (message) => {
   const map = document.querySelector('.map');
   const mapCanvas = document.querySelector('#map-canvas');
@@ -34,6 +35,7 @@ const showAlertOnMap = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+
 const createPopup = (template) => {
   const element = template.cloneNode(true);
   element.style.zIndex = '1000';
@@ -49,7 +51,7 @@ const showSuccessAlert = () => {
   const removeSuccessEventListener = () => {
     document.removeEventListener('keydown', onSuccessEscKeydown);
     document.removeEventListener('click', onSuccessClick);
-  }
+  };
 
   const onSuccessEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
@@ -99,7 +101,7 @@ const showErrorAlert = () => {
     errorElement.remove();
 
     removeErrorEventListener();
-  }
+  };
 
   document.addEventListener('keydown', onErrorEscKeydown);
   document.addEventListener('click', onErrorClick);
@@ -107,4 +109,4 @@ const showErrorAlert = () => {
 }
 
 
-export { showAlertOnMap, showSuccessAlert, showErrorAlert }
+export { showAlertOnMap, showSuccessAlert, showErrorAlert };

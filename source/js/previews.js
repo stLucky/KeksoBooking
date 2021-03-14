@@ -8,6 +8,7 @@ const housePhotoInput = document.querySelector('.ad-form__upload input[type=file
 
 const imageElement = document.createElement('img');
 
+
 const addImageForHousePreview = () => {
   imageElement.style.width = '100%';
   imageElement.style.height = '100%';
@@ -45,7 +46,7 @@ showPreviewImage(housePhotoInput, imageElement);
 
 const resetPreviews = () => {
   avatarPreview.src = 'img/muffin-grey.svg';
-  imageElement.src = 'data:image/svg+xml,%23e4e4de';
+  imageElement.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg"%3E%3C/svg%3E';
 };
 
 export { resetPreviews };

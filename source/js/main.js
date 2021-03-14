@@ -1,10 +1,10 @@
 import { map, renderMarksOnMap } from './map.js';
-import { switchToInactiveState, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault } from './page-mod.js';
+import { switchToInactiveStatePage, switchToActiveStateForm, switchToActiveStateFilters, setPageInDefault } from './page-mod.js';
 import { setAdFormSubmit } from './form.js';
 import { showAlertOnMap } from './popup-messages.js';
 import { getData } from './api.js';
 import { setMapFilters } from './map-filters.js';
-import * as debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -21,7 +21,7 @@ const RERENDER_DELAY = 500;
 const resetFormButton = document.querySelector('.ad-form__reset');
 
 
-switchToInactiveState();
+switchToInactiveStatePage();
 
 map.whenReady(() => {
   switchToActiveStateForm();
