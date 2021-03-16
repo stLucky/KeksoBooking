@@ -1,5 +1,5 @@
-# Личный проект «Кексобукинг»
-
+[![Project test & build](https://github.com/stLucky/KeksoBooking/actions/workflows/main.yml/badge.svg)](https://github.com/stLucky/KeksoBooking/actions/workflows/main.yml)
+https://stlucky.github.io/KeksoBooking/
 ***********************************************************************************************************************************************************************************
 # Кексобукинг
 *Сервис размещения объявлений о сдаче в аренду недвижимости в центре Токио.
